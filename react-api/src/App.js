@@ -18,7 +18,7 @@ class App extends Component {
 
     handleSubmit = blog => {
         this.setState({contents: [...this.state.contents, blog]});
-        fetch('http://192.168.10.100:5050/blog', {
+        fetch('http://127.0.0.1:5050/blog', {
           method: 'POST',
           headers: {
              'Accept': 'application/json',
@@ -33,7 +33,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch('http://192.168.10.100:5050/blog')
+        fetch('http://127.0.0.1:5050/blog')
             .then(res => res.json())
             .then((data) => {
                 this.setState({ contents: data })
