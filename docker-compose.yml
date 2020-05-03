@@ -14,18 +14,20 @@ services:
       MYSQL_DATABASE: restapi
     ports:
       - 3306:3306
-#    network_mode: "bridge"
+    network_mode: "bridge"
 
 
   apiserverdocker:
     build:
       context: server-api
     image: miksonx/server-api:latest
+    depends_on:
+      - database
     container_name: server-api
     ports:
       - "5050:5050"
     restart: always
-#    network_mode: "bridge"
+    network_mode: "bridge"
 
 
 
@@ -33,11 +35,14 @@ services:
     build:
       context: react-api
     image: miksonx/react-api:latest
+    depends_on:
+      - database
+      - apiserverdocker
     container_name: react-api
     ports:
-      - "3030:3030"
+      - "80:80"
     restart: always
-#    network_mode: "bridge"
+    network_mode: "bridge"
 
 
   #
